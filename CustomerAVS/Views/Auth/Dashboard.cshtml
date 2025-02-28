@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+
+<h2>Bienvenido, @Session["User"]</h2>
+<p>Este es el panel de control después del inicio de sesión.</p>
+
+<a href="@Url.Action("Logout", "Auth")" class="btn btn-danger">Cerrar Sesión</a>

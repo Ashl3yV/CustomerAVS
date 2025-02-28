@@ -18,7 +18,7 @@ public class CustomerDAL
         using (SqlConnection conn = new SqlConnection(connectionString))
         {
 
-            string query = @"SELECT * FROM Customer";
+            string query = @"SELECT * FROM Customer WHERE Employee = 0";
 
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
@@ -97,5 +97,18 @@ public class CustomerDAL
         }
     }
 
+    public void DeleteCustomer(int id)
+    {
+        using (SqlConnection conn = new SqlConnection(connectionString))
+        {
+            using (SqlCommand cmd = new SqlCommand("sp_DeleteCustomer", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@ID", id);
 
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+    }
 }

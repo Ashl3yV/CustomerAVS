@@ -9,8 +9,8 @@ using System.Web.Mvc;
 using CustomerAVS.Models;
 using System.Data.SqlClient;
 using System.Data;
-using PagedList;  // Agregar esta librería
-using PagedList.Mvc;  // Para la paginación en la vista
+using PagedList;  
+using PagedList.Mvc;  
 
 namespace CustomerAVS.Controllers
 {
@@ -20,9 +20,9 @@ namespace CustomerAVS.Controllers
 
         public ActionResult Index(int? page)
         {
-            var customers = customerDAL.GetAllCustomers(); // Obtener todos los clientes
-            int pageSize = 10; // Cantidad de registros por página
-            int pageNumber = (page ?? 1); // Página actual (si es null, será 1)
+            var customers = customerDAL.GetAllCustomers(); 
+            int pageSize = 10; 
+            int pageNumber = (page ?? 1); 
 
             return View(customers.ToPagedList(pageNumber, pageSize));
         }
@@ -70,5 +70,36 @@ namespace CustomerAVS.Controllers
             }
             return View(updatedCustomer);
         }
+
+        // GET: Customer/Delete/5
+        public ActionResult Delete(int id)
+        {
+            var customer = customerDAL.GetAllCustomers().FirstOrDefault(c => c.ID == id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+
+        // POST: Customer/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            customerDAL.DeleteCustomer(id);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Dashboard()
+        {
+            if (Session["User"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
+            return View();
+        }
+
     }
 }

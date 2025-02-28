@@ -1,0 +1,21 @@
+﻿@model CustomerAVS.Models.customer
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<div class="alert alert-warning">
+    <p>¿Estás seguro de que deseas eliminar al cliente <strong>@Model.FirstName @Model.LastName</strong>?</p>
+</div>
+
+@using (Html.BeginForm("Delete", "Customer", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ID)
+
+    <button type="submit" class="btn btn-danger">Confirmar Eliminación</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">Cancelar</a>
+}
