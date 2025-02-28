@@ -9,21 +9,42 @@ using System.Web.Mvc;
 using CustomerAVS.Models;
 using System.Data.SqlClient;
 using System.Data;
+using PagedList;  // Agregar esta librería
+using PagedList.Mvc;  // Para la paginación en la vista
 
 namespace CustomerAVS.Controllers
 {
     public class CustomerController : Controller
     {
-        private static string conexion = ConfigurationManager.ConnectionStrings["DBCustomer"].ToString();
+        private CustomerDAL customerDAL = new CustomerDAL();
 
-        public static List<customer> olista = new List<customer>();
-        // GET: Customer
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            using (SqlConnection oconexion = new SqlConnection(conexion))
+            var customers = customerDAL.GetAllCustomers(); // Obtener todos los clientes
+            int pageSize = 10; // Cantidad de registros por página
+            int pageNumber = (page ?? 1); // Página actual (si es null, será 1)
+
+            return View(customers.ToPagedList(pageNumber, pageSize));
+        }
+
+        // GET: Customer/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Customer/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(customer newCustomer)
+        {
+            if (ModelState.IsValid)
             {
-                SqlConnection cmd = new 
+                newCustomer.LastUpdated = DateTime.Now;
+                customerDAL.AddCustomer(newCustomer);
+                return RedirectToAction("Index");
             }
+            return View(newCustomer);
         }
     }
 }

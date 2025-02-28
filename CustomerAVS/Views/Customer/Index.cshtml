@@ -1,0 +1,49 @@
+﻿
+@model PagedList.IPagedList<CustomerAVS.Models.customer>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<!-- Botón para agregar nuevo cliente -->
+<p>
+    <a href="@Url.Action("Create", "Customer")" class="btn btn-success">
+        <i class="fa fa-plus"></i> Agregar Nuevo Cliente
+    </a>
+</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Teléfono</th>
+            <th>Compañía</th>
+            <th>Última Visita</th>
+            <th>Cuenta Abierta</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.PhoneNumber</td>
+                <td>@item.Company</td>
+                <td>@item.LastVisit.ToShortDateString()</td>
+                <td>@item.AccountOpened.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    Página @Model.PageNumber de @Model.PageCount
+</div>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

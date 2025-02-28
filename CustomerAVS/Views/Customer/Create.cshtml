@@ -1,0 +1,58 @@
+﻿@model CustomerAVS.Models.customer
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "Customer", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FirstName)
+        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.FirstName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LastName)
+        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.LastName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PhoneNumber)
+        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.PhoneNumber)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Company)
+        @Html.TextBoxFor(model => model.Company, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Company)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.AccountNumber)
+        @Html.TextBoxFor(model => model.AccountNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.AccountNumber)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.AccountOpened)
+        @Html.TextBoxFor(model => model.AccountOpened, new { @class = "form-control", type = "date" })
+        @Html.ValidationMessageFor(model => model.AccountOpened)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LastVisit)
+        @Html.TextBoxFor(model => model.LastVisit, new { @class = "form-control", type = "date" })
+        @Html.ValidationMessageFor(model => model.LastVisit)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">Cancelar</a>
+}
