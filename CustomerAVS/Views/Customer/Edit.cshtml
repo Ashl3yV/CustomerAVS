@@ -1,0 +1,61 @@
+﻿@model CustomerAVS.Models.customer
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Editar Cliente</h2>
+
+@using (Html.BeginForm("Edit", "Customer", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ID)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FirstName)
+        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.FirstName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LastName)
+        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.LastName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PhoneNumber)
+        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.PhoneNumber)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Company)
+        @Html.TextBoxFor(model => model.Company, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Company)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.AccountNumber)
+        @Html.TextBoxFor(model => model.AccountNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.AccountNumber)
+    </div>
+
+    <div class="form-group">
+        <label>Cuenta Abierta:</label>
+        @Html.TextBox("AccountOpened",
+            Model.AccountOpened.ToString("yyyy-MM-dd"),
+            new { @class = "form-control", type = "date" })
+    </div>
+
+    <div class="form-group">
+        <label>Última Visita:</label>
+        @Html.TextBox("LastVisit",
+            Model.LastVisit.ToString("yyyy-MM-dd"),
+            new { @class = "form-control", type = "date" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">Cancelar</a>
+}

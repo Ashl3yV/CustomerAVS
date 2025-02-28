@@ -72,5 +72,30 @@ public class CustomerDAL
         }
     }
 
+    public void UpdateCustomer(customer updatedCustomer)
+    {
+        using (SqlConnection conn = new SqlConnection(connectionString))
+        {
+            using (SqlCommand cmd = new SqlCommand("sp_UpdateCustomer", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@ID", updatedCustomer.ID);
+                cmd.Parameters.AddWithValue("@TotalVisits", updatedCustomer.TotalVisits);
+                cmd.Parameters.AddWithValue("@AccountNumber", updatedCustomer.AccountNumber);
+                cmd.Parameters.AddWithValue("@Company", updatedCustomer.Company);
+                cmd.Parameters.AddWithValue("@FirstName", updatedCustomer.FirstName);
+                cmd.Parameters.AddWithValue("@LastName", updatedCustomer.LastName);
+                cmd.Parameters.AddWithValue("@PhoneNumber", updatedCustomer.PhoneNumber);
+                cmd.Parameters.AddWithValue("@LastUpdated", DateTime.Now);
+                cmd.Parameters.AddWithValue("@AccountOpened", updatedCustomer.AccountOpened);
+                cmd.Parameters.AddWithValue("@LastVisit", updatedCustomer.LastVisit);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+    }
+
 
 }

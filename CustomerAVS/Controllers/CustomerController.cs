@@ -46,5 +46,29 @@ namespace CustomerAVS.Controllers
             }
             return View(newCustomer);
         }
+
+        // GET: Customer/Edit/5
+        public ActionResult Edit(int id)
+        {
+            var customer = customerDAL.GetAllCustomers().FirstOrDefault(c => c.ID == id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+
+        // POST: Customer/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(customer updatedCustomer)
+        {
+            if (ModelState.IsValid)
+            {
+                customerDAL.UpdateCustomer(updatedCustomer);
+                return RedirectToAction("Index");
+            }
+            return View(updatedCustomer);
+        }
     }
 }

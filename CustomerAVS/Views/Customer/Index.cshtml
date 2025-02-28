@@ -38,6 +38,11 @@
                 <td>@item.Company</td>
                 <td>@item.LastVisit.ToShortDateString()</td>
                 <td>@item.AccountOpened.ToShortDateString()</td>
+                <td>
+                    <a href="@Url.Action("Edit", "Customer", new { id = item.ID })" class="btn btn-warning">
+                        <i class="fa fa-edit"></i> Editar
+                    </a>
+                </td>
             </tr>
         }
     </tbody>
