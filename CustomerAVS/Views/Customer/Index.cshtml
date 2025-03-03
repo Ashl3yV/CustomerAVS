@@ -9,14 +9,13 @@
 
 <h2>Index</h2>
 
-<!-- Botón para agregar nuevo cliente -->
 <p>
     <a href="@Url.Action("Create", "Customer")" class="btn btn-success">
         <i class="fa fa-plus"></i> Agregar Nuevo Cliente
     </a>
 </p>
-<table class="table table-striped">
-    <thead>
+<table class="table table-striped table-hover table-bordered">
+    <thead class="table-dark">
         <tr>
             <th>ID</th>
             <th>Nombre</th>
@@ -25,6 +24,7 @@
             <th>Compañía</th>
             <th>Última Visita</th>
             <th>Cuenta Abierta</th>
+            <th>Opciones</th>
         </tr>
     </thead>
     <tbody>
@@ -39,11 +39,11 @@
                 <td>@item.LastVisit.ToShortDateString()</td>
                 <td>@item.AccountOpened.ToShortDateString()</td>
                 <td>
-                    <a href="@Url.Action("Edit", "Customer", new { id = item.ID })" class="btn btn-warning">
-                        <i class="fa fa-edit"></i> Editar
+                    <a href="@Url.Action("Edit", "Customer", new { id = item.ID })" class="btn btn-warning btn-sm">
+                        <i class="fas fa-edit"></i> Editar
                     </a>
-                    <a href="@Url.Action("Delete", "Customer", new { id = item.ID })" class="btn btn-danger">
-                        <i class="fa fa-trash"></i> Eliminar
+                    <a href="@Url.Action("Delete", "Customer", new { id = item.ID })" class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash"></i> Eliminar
                     </a>
                 </td>
             </tr>
@@ -54,4 +54,31 @@
     Página @Model.PageNumber de @Model.PageCount
 </div>
 
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+<nav>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+        new PagedListRenderOptions
+        {
+            UlElementClasses = new[] { "pagination", "pagination-sm", "justify-content-center" },
+            LiElementClasses = new[] { "page-item" }, 
+            DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+            DisplayLinkToLastPage = PagedListDisplayMode.Always,
+            DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+            DisplayLinkToNextPage = PagedListDisplayMode.Always,
+            DisplayItemSliceAndTotal = false
+        })
+</nav>
+
+<style>
+    .pagination a {
+        text-decoration: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    .pagination .page-item.active a {
+        background-color: #007bff;
+        color: white;
+        border: 1px solid #007bff;
+    }
+</style>
+

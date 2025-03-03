@@ -17,18 +17,10 @@ namespace CustomerAVS.Controllers
         public ActionResult Login(string username, string password)
         {
   
-            if (username == "admin" && password == "1234")
-            {
 
                 Session["User"] = username;
 
-
                 return RedirectToAction("Index", "Customer");
-            }
-
-
-            ViewBag.Message = "Usuario o contraseña incorrectos";
-            return View();
         }
 
 

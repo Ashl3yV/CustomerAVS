@@ -1,58 +1,101 @@
 ﻿@model CustomerAVS.Models.customer
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Crear Cliente";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
-
-@using (Html.BeginForm("Create", "Customer", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.FirstName)
-        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.FirstName)
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title"><i class="fas fa-user-plus"></i> Crear Cliente</h3>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.LastName)
-        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.LastName)
-    </div>
+    @using (Html.BeginForm("Create", "Customer", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.PhoneNumber)
-        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.PhoneNumber)
-    </div>
+        <div class="card-body">
+            <div class="form-group">
+                @Html.LabelFor(model => model.FirstName, "Nombre")
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    </div>
+                    @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", placeholder = "Ingrese el nombre" })
+                </div>
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Company)
-        @Html.TextBoxFor(model => model.Company, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.Company)
-    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.LastName, "Apellido")
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    </div>
+                    @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", placeholder = "Ingrese el apellido" })
+                </div>
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.AccountNumber)
-        @Html.TextBoxFor(model => model.AccountNumber, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.AccountNumber)
-    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PhoneNumber, "Teléfono")
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                    </div>
+                    @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", placeholder = "Ingrese el teléfono" })
+                </div>
+                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.AccountOpened)
-        @Html.TextBoxFor(model => model.AccountOpened, new { @class = "form-control", type = "date" })
-        @Html.ValidationMessageFor(model => model.AccountOpened)
-    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Company, "Empresa")
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-building"></i></span>
+                    </div>
+                    @Html.TextBoxFor(model => model.Company, new { @class = "form-control", placeholder = "Ingrese la empresa" })
+                </div>
+                @Html.ValidationMessageFor(model => model.Company, "", new { @class = "text-danger" })
+            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.LastVisit)
-        @Html.TextBoxFor(model => model.LastVisit, new { @class = "form-control", type = "date" })
-        @Html.ValidationMessageFor(model => model.LastVisit)
-    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.AccountNumber, "Número de Cuenta")
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                    </div>
+                    @Html.TextBoxFor(model => model.AccountNumber, new { @class = "form-control", placeholder = "Ingrese el número de cuenta" })
+                </div>
+                @Html.ValidationMessageFor(model => model.AccountNumber, "", new { @class = "text-danger" })
+            </div>
 
-    <button type="submit" class="btn btn-primary">Guardar</button>
-    <a href="@Url.Action("Index")" class="btn btn-secondary">Cancelar</a>
-}
+            <div class="form-group">
+                @Html.LabelFor(model => model.AccountOpened, "Fecha de Apertura")
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                    </div>
+                    @Html.TextBoxFor(model => model.AccountOpened, new { @class = "form-control", type = "date" })
+                </div>
+                @Html.ValidationMessageFor(model => model.AccountOpened, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LastVisit, "Última Visita")
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-calendar-check"></i></span>
+                    </div>
+                    @Html.TextBoxFor(model => model.LastVisit, new { @class = "form-control", type = "date" })
+                </div>
+                @Html.ValidationMessageFor(model => model.LastVisit, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
+            <a href="@Url.Action("Index")" class="btn btn-secondary"><i class="fas fa-times"></i> Cancelar</a>
+        </div>
+    }
+</div>

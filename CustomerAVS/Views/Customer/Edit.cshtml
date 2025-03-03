@@ -1,61 +1,71 @@
 ﻿@model CustomerAVS.Models.customer
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editar Cliente";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Editar Cliente</h2>
-
-@using (Html.BeginForm("Edit", "Customer", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.ID)
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.FirstName)
-        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.FirstName)
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title"><i class="fas fa-edit"></i> Editar Cliente</h3>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.LastName)
-        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.LastName)
-    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("Edit", "Customer", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.ID)
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.PhoneNumber)
-        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.PhoneNumber)
-    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.FirstName, "Nombre")
+                @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", placeholder = "Ingrese el nombre" })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Company)
-        @Html.TextBoxFor(model => model.Company, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.Company)
-    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.LastName, "Apellido")
+                @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", placeholder = "Ingrese el apellido" })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.AccountNumber)
-        @Html.TextBoxFor(model => model.AccountNumber, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.AccountNumber)
-    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PhoneNumber, "Número de Teléfono")
+                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", placeholder = "Ingrese el número de teléfono" })
+                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+            </div>
 
-    <div class="form-group">
-        <label>Cuenta Abierta:</label>
-        @Html.TextBox("AccountOpened",
-            Model.AccountOpened.ToString("yyyy-MM-dd"),
-            new { @class = "form-control", type = "date" })
-    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Company, "Compañía")
+                @Html.TextBoxFor(model => model.Company, new { @class = "form-control", placeholder = "Ingrese el nombre de la compañía" })
+                @Html.ValidationMessageFor(model => model.Company, "", new { @class = "text-danger" })
+            </div>
 
-    <div class="form-group">
-        <label>Última Visita:</label>
-        @Html.TextBox("LastVisit",
-            Model.LastVisit.ToString("yyyy-MM-dd"),
-            new { @class = "form-control", type = "date" })
-    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.AccountNumber, "Número de Cuenta")
+                @Html.TextBoxFor(model => model.AccountNumber, new { @class = "form-control", placeholder = "Ingrese el número de cuenta" })
+                @Html.ValidationMessageFor(model => model.AccountNumber, "", new { @class = "text-danger" })
+            </div>
 
-    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-    <a href="@Url.Action("Index")" class="btn btn-secondary">Cancelar</a>
-}
+            <div class="form-group">
+                <label for="AccountOpened">Cuenta Abierta:</label>
+                @Html.TextBox("AccountOpened", Model.AccountOpened.ToString("yyyy-MM-dd"), new { @class = "form-control", type = "date" })
+            </div>
+
+            <div class="form-group">
+                <label for="LastVisit">Última Visita:</label>
+                @Html.TextBox("LastVisit", Model.LastVisit.ToString("yyyy-MM-dd"), new { @class = "form-control", type = "date" })
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">
+                    <i class="fas fa-save"></i> Guardar Cambios
+                </button>
+            </div>
+            <div class="form-group">
+                <a href="@Url.Action("Index")" class="btn btn-secondary btn-block">
+                    <i class="fas fa-times"></i> Cancelar
+                </a>
+            </div>
+        }
+    </div>
+</div>
