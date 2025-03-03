@@ -13,6 +13,12 @@
     <a href="@Url.Action("Create", "Customer")" class="btn btn-success">
         <i class="fa fa-plus"></i> Agregar Nuevo Cliente
     </a>
+    <a href="@Url.Action("ExportToExcel", "Customer")" class="btn btn-primary">
+        <i class="fas fa-file-excel"></i> Exportar a Excel
+    </a>
+    <a href="@Url.Action("ExportToPDF", "Customer")" class="btn btn-danger">
+        <i class="fas fa-file-pdf"></i> Exportar a PDF
+    </a>
 </p>
 <table class="table table-striped table-hover table-bordered">
     <thead class="table-dark">
